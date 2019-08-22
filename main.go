@@ -220,6 +220,6 @@ func stop() error {
 func main() {
 	defer common.Cleanup()
 
-	common.New(&common.App{"hl7proxy", "1.0.3", "2018", "Persistent connection proxy", "mpetavy", common.APACHE, "https://github.com/mpetavy/hl7proxy", true, nil,start, stop, nil, 0}, []string{"s", "d"})
+	common.New(&common.App{"hl7proxy", "1.0.3", "2018", "Persistent connection proxy", "mpetavy", common.APACHE, "https://github.com/mpetavy/hl7proxy", true, start, stop, nil, 0}, []string{"s", "d"})
 	common.Run()
 }
