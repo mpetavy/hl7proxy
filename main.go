@@ -25,6 +25,8 @@ const (
 )
 
 func init() {
+	common.Init("hl7proxy", "1.0.3", "2018", "Persistent connection proxy", "mpetavy", common.APACHE, "https://github.com/mpetavy/hl7proxy", true, start, stop, nil, 0)
+
 	source = flag.String("s", "", "server socket host address")
 	dest = flag.String("d", "", "destination socket host address")
 	readTimeout = flag.Int64("rt", int64(100), "destination socket read timeout in ms")
@@ -220,6 +222,5 @@ func stop() error {
 func main() {
 	defer common.Cleanup()
 
-	common.New(&common.App{"hl7proxy", "1.0.3", "2018", "Persistent connection proxy", "mpetavy", common.APACHE, "https://github.com/mpetavy/hl7proxy", true, start, stop, nil, 0}, []string{"s", "d"})
-	common.Run()
+	common.Run([]string{"s", "d"})
 }
