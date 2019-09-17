@@ -5,83 +5,32 @@ import (
 	"flag"
 	"fmt"
 	"github.com/mpetavy/common"
+	"io"
 	"net"
-	"sync"
+	"os"
 	"time"
 )
 
 var (
-	source      *string
-	dest        *string
-	listener    *net.TCPListener
-	commCon     *net.TCPConn
-	forumCon    *net.TCPConn
-	readTimeout *int64
+	source   *string
+	dest     *string
+	file     *string
+	listener *net.TCPListener
+	emrCon   *net.TCPConn
+	forumCon *net.TCPConn
 )
 
 const (
 	proxyToForum = "Proxy->Forum"
-	commToProxy  = "Comm->Proxy"
+	emrToProxy   = "Emr->Proxy"
 )
 
 func init() {
-	common.Init("hl7proxy", "1.0.3", "2018", "Persistent connection proxy", "mpetavy", common.APACHE, "https://github.com/mpetavy/hl7proxy", true, start, stop, nil, 0)
+	common.Init("hl7proxy", "1.1.0", "2018", "Persistent connection proxy", "mpetavy", common.APACHE, "https://github.com/mpetavy/hl7proxy", true, start, stop, nil, 0)
 
-	source = flag.String("s", "", "server socket host address")
-	dest = flag.String("d", "", "destination socket host address")
-	readTimeout = flag.Int64("rt", int64(100), "destination socket read timeout in ms")
-}
-
-func copier(name string, wg *sync.WaitGroup, ctx *context.Context, cancel *context.CancelFunc, dest *net.TCPConn, source *net.TCPConn) {
-
-	var c int64
-	serr := ""
-	b := make([]byte, 8192)
-
-	defer func() {
-		common.Debug("%s quit, copied %d bytes", name, c)
-		wg.Done()
-	}()
-
-	for {
-		select {
-		case <-(*ctx).Done():
-			return
-		default:
-		}
-
-		source.SetReadDeadline(time.Now().Add(time.Duration(*readTimeout) * time.Millisecond))
-
-		r, err := source.Read(b)
-
-		if err != nil {
-			if neterr, ok := err.(net.Error); ok && neterr.Timeout() {
-				continue
-			}
-
-			serr = err.Error()
-		}
-
-		if r > 0 {
-			s := 0
-			for s < r {
-				w, err := dest.Write(b[s:r])
-				if err != nil {
-					serr = err.Error()
-					break
-				}
-
-				s = s + w
-				c = c + int64(w)
-			}
-		}
-
-		if serr != "" {
-			common.Debug("%s cancels! err: %s", name, serr)
-			(*cancel)()
-			return
-		}
-	}
+	source = flag.String("s", "", "proxy host address:port (:5000)")
+	dest = flag.String("d", "", "destination host address (forumserver:7000)")
+	file = flag.String("f", "", "file to save the network stream")
 }
 
 func startProxy() error {
@@ -160,11 +109,20 @@ func start() error {
 		return err
 	}
 
+	if *file != "" {
+		*file = common.CleanPath(*file)
+
+		err := common.FileDelete(*file)
+		if err != nil {
+			return err
+		}
+	}
+
 	go func() {
-		for {
+		for !common.AppStopped() {
 			err := startProxy()
 			if err != nil {
-				stopProxy()
+				common.DebugError(stopProxy())
 
 				continue
 			}
@@ -175,7 +133,7 @@ func start() error {
 			}
 
 			common.Debug("listener.AcceptTCP() ...")
-			commCon, err = listener.AcceptTCP()
+			emrCon, err = listener.AcceptTCP()
 			if err != nil {
 				if listener != nil {
 					common.Error(err)
@@ -184,31 +142,65 @@ func start() error {
 				break
 			}
 
-			common.Debug("listener.AcceptTCP() from %s", commCon.RemoteAddr())
+			common.Debug("listener.AcceptTCP() from %s", emrCon.RemoteAddr())
 
 			err = startForumConnection()
 			if err != nil {
 				common.Error(fmt.Errorf("connection to client %s not possible, reset server connection", *dest))
 
-				stopProxy()
+				common.DebugError(stopProxy())
 
 				continue
 			}
 
 			common.Debug("Start data transfer")
 
-			ctx, cancel := context.WithCancel(context.Background())
-			wg := sync.WaitGroup{}
-			wg.Add(2)
+			var f *os.File
+			var teeReader io.Reader
 
-			go copier(commToProxy, &wg, &ctx, &cancel, forumCon, commCon)
-			go copier(proxyToForum, &wg, &ctx, &cancel, commCon, forumCon)
+			if *file != "" {
+				common.Debug("open file %s ...", *file)
+				f, err = os.OpenFile(*file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, os.ModePerm)
+				if err != nil {
+					common.Error(err)
+				}
 
-			wg.Wait()
+				teeReader = io.TeeReader(emrCon, f)
+			} else {
+				teeReader = emrCon
+			}
 
-			common.Debug("Stop data transfer")
+			ctxDelayer, cancelDelayer := context.WithCancel(context.Background())
+			ctxConnection, cancelConnection := context.WithCancel(context.Background())
 
-			stopForumConnection()
+			go common.CopyWithContext(ctxConnection, cancelDelayer, emrToProxy, forumCon, teeReader)
+			go common.CopyWithContext(ctxConnection, cancelDelayer, proxyToForum, emrCon, forumCon)
+
+			var inDelay common.Sign
+
+		Delayer:
+			for {
+				select {
+				case <-ctxDelayer.Done():
+					if !inDelay.IsSet() {
+						inDelay.Set()
+
+						common.Debug("Delayer received Done()")
+						common.Debug("Sleep 1 sec ...")
+						time.Sleep(time.Second)
+						common.Debug("1 sec slept")
+
+						cancelConnection()
+					}
+				case <-ctxConnection.Done():
+					if f != nil {
+						common.DebugError(f.Close())
+					}
+
+					common.DebugError(stopForumConnection())
+					break Delayer
+				}
+			}
 		}
 	}()
 
