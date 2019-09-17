@@ -127,10 +127,10 @@ func start() error {
 				continue
 			}
 
-			err = startForumConnection()
-			if err != nil {
-				common.Warn(fmt.Sprintf("connection to client %s not possible, retry on next request ...", *dest))
-			}
+			//err = startForumConnection()
+			//if err != nil {
+			//	common.Warn(fmt.Sprintf("connection to client %s not possible, retry on next request ...", *dest))
+			//}
 
 			common.Debug("listener.AcceptTCP() ...")
 			emrCon, err = listener.AcceptTCP()
