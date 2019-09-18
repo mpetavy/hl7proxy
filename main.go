@@ -26,7 +26,7 @@ const (
 )
 
 func init() {
-	common.Init("hl7proxy", "1.1.1", "2018", "Persistent connection proxy", "mpetavy", common.APACHE, "https://github.com/mpetavy/hl7proxy", true, start, stop, nil, 0)
+	common.Init("1.1.1", "2018", "Persistent connection proxy", "mpetavy", common.APACHE, true, start, stop, nil, 0)
 
 	source = flag.String("s", "", "proxy host address:port (:5000)")
 	dest = flag.String("d", "", "destination host address (forumserver:7000)")
