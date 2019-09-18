@@ -160,7 +160,7 @@ func start() error {
 
 			if *file != "" {
 				common.Debug("open file %s ...", *file)
-				f, err = os.OpenFile(*file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, os.ModePerm)
+				f, err = os.OpenFile(*file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, common.FileFileMode)
 				if err != nil {
 					common.Error(err)
 				}
