@@ -1,4 +1,15 @@
-# Binaries for programs and plugins
+# Ignore all
+*
+
+# Unignore all with extensions
+!*.*
+
+# Unignore all dirs
+!*/
+
+### Above combination will ignore all files without extension ###
+
+# Ignore files with extension `.class` & `.sm`
 *.exe
 *.dll
 *.so
@@ -6,16 +17,17 @@
 *.log
 *.db
 *.bak
-debug
-
-# Test binary, build with `go test -c`
-*.test
-
-# Output of the go coverage tool, specifically when used with LiteIDE
+*.dmp
+*.tmp
+*.class
+*.sm
 *.out
 
-# Project-local glide cache, RE: https://github.com/Masterminds/glide/issues/736
-.glide/
-
+.glide
 .idea
 .vscode
+.rnd
+
+debug
+bin
+target
