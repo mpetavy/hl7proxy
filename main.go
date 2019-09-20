@@ -119,7 +119,7 @@ func start() error {
 	}
 
 	go func() {
-		for !common.AppStopped() {
+		for !common.AppDeath().IsSet() {
 			err := startProxy()
 			if err != nil {
 				common.DebugError(stopProxy())
@@ -176,7 +176,7 @@ func start() error {
 			go common.CopyWithContext(ctxConnection, cancelDelayer, emrToProxy, forumCon, teeReader)
 			go common.CopyWithContext(ctxConnection, cancelDelayer, proxyToForum, emrCon, forumCon)
 
-			var inDelay common.Sign
+			inDelay := common.NewSignal()
 
 		Delayer:
 			for {
