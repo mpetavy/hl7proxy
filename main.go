@@ -176,7 +176,7 @@ func start() error {
 			go common.CopyWithContext(ctxConnection, cancelDelayer, emrToProxy, forumCon, teeReader)
 			go common.CopyWithContext(ctxConnection, cancelDelayer, proxyToForum, emrCon, forumCon)
 
-			inDelay := common.NewSignal()
+			inDelay := common.NewNotice()
 
 		Delayer:
 			for {
