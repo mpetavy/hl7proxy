@@ -119,7 +119,7 @@ func start() error {
 	}
 
 	go func() {
-		for !common.AppDeath().IsSet() {
+		for common.AppLifecycle().IsSet() {
 			err := startProxy()
 			if err != nil {
 				common.DebugError(stopProxy())
