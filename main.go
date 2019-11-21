@@ -122,7 +122,7 @@ func start() error {
 		for common.AppLifecycle().IsSet() {
 			err := startProxy()
 			if err != nil {
-				common.DebugError(stopProxy())
+				common.WarnError(stopProxy())
 
 				continue
 			}
@@ -148,7 +148,7 @@ func start() error {
 			if err != nil {
 				common.Error(fmt.Errorf("connection to client %s not possible, reset server connection", *dest))
 
-				common.DebugError(stopProxy())
+				common.WarnError(stopProxy())
 
 				continue
 			}
@@ -194,10 +194,10 @@ func start() error {
 					}
 				case <-ctxConnection.Done():
 					if f != nil {
-						common.DebugError(f.Close())
+						common.WarnError(f.Close())
 					}
 
-					common.DebugError(stopForumConnection())
+					common.WarnError(stopForumConnection())
 					break Delayer
 				}
 			}
