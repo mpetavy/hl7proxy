@@ -173,8 +173,8 @@ func start() error {
 			ctxDelayer, cancelDelayer := context.WithCancel(context.Background())
 			ctxConnection, cancelConnection := context.WithCancel(context.Background())
 
-			go common.CopyWithContext(ctxConnection, cancelDelayer, emrToProxy, forumCon, teeReader)
-			go common.CopyWithContext(ctxConnection, cancelDelayer, proxyToForum, emrCon, forumCon)
+			go common.CopyWithContext(ctxConnection, cancelDelayer, emrToProxy, forumCon, teeReader, -1)
+			go common.CopyWithContext(ctxConnection, cancelDelayer, proxyToForum, emrCon, forumCon, -1)
 
 			inDelay := common.NewNotice()
 
