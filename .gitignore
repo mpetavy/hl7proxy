@@ -7,6 +7,12 @@
 # Unignore all dirs
 !*/
 
+# Keep files which filenames have no extenion
+!Dockerfile
+
+# Keep files which filenames have no extenion
+!.goreleaser.yml 
+
 ### Above combination will ignore all files without extension ###
 
 # Ignore files with extension `.class` & `.sm`
@@ -14,7 +20,7 @@
 *.dll
 *.so
 *.dylib
-*.log
+*.log*
 *.db
 *.bak
 *.dmp
@@ -22,12 +28,18 @@
 *.class
 *.sm
 *.out
+*.1
+*.2
+*.3
+*.4
+*.5
+*.p12
 
 .glide
 .idea
 .vscode
 .rnd
-
+dist
 debug
 bin
 target
