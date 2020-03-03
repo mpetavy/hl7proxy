@@ -225,8 +225,8 @@ func stop() error {
 func main() {
 	defer common.Done()
 
-	flag.VisitAll(func(fl *flag.Flag) {
-		fmt.Printf("%s | %s | %s\n", fl.Name, fl.DefValue, fl.Usage)
-	})
+	//flag.VisitAll(func(fl *flag.Flag) {
+	//	fmt.Printf("%s | %s | %s\n", fl.Name, fl.DefValue, fl.Usage)
+	//})
 	common.Run([]string{"s", "d"})
 }
