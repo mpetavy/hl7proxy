@@ -12,12 +12,15 @@ import (
 )
 
 var (
-	source   *string
-	dest     *string
-	file     *string
-	listener *net.TCPListener
-	emrCon   *net.TCPConn
-	forumCon *net.TCPConn
+	source        *string
+	sourceEncoder *string
+	dest          *string
+	destEncoder   *string
+	file          *string
+	listener      *net.TCPListener
+	emrCon        *net.TCPConn
+	forumCon      *net.TCPConn
+	hl7filter     *bool
 )
 
 const (
@@ -26,11 +29,14 @@ const (
 )
 
 func init() {
-	common.Init("1.1.1", "2018", "Persistent connection proxy", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, true, start, stop, nil, 0)
+	common.Init("1.2.0", "2018", "HL7 connection proxy", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, true, start, stop, nil, 0)
 
 	source = flag.String("s", "", "proxy host address:port (:5000)")
+	sourceEncoder = flag.String("senc", "", "encoder to convert incoming HL7 messages")
 	dest = flag.String("d", "", "destination host address (forumserver:7000)")
-	file = flag.String("f", "", "file to save the network stream")
+	destEncoder = flag.String("denc", "", "encoder to convert outgoing HL7 messages")
+	file = flag.String("f", "", "filename to log all transferred HL7 data of stream")
+	hl7filter = flag.Bool("hl7", true, "trim data to valid HL7 message blocks in MLLP")
 }
 
 func startProxy() error {
@@ -127,11 +133,6 @@ func start() error {
 				continue
 			}
 
-			//err = startForumConnection()
-			//if err != nil {
-			//	common.Warn(fmt.Sprintf("connection to client %s not possible, retry on next request ...", *dest))
-			//}
-
 			common.Debug("listener.AcceptTCP() ...")
 			emrCon, err = listener.AcceptTCP()
 			if err != nil {
@@ -157,6 +158,16 @@ func start() error {
 
 			var f *os.File
 			var teeReader io.Reader
+			var emrReader io.Reader
+			var forumReader io.Reader
+
+			emrReader = emrCon
+			forumReader = forumCon
+
+			if *hl7filter {
+				emrReader = NewHL7Filter(emrReader, *sourceEncoder)
+				forumReader = NewHL7Filter(forumReader, *destEncoder)
+			}
 
 			if *file != "" {
 				common.Debug("open file %s ...", *file)
@@ -165,9 +176,9 @@ func start() error {
 					common.Error(err)
 				}
 
-				teeReader = io.TeeReader(emrCon, f)
+				teeReader = io.TeeReader(emrReader, f)
 			} else {
-				teeReader = emrCon
+				teeReader = emrReader
 			}
 
 			ctxDelayer, cancelDelayer := context.WithCancel(context.Background())
@@ -214,5 +225,8 @@ func stop() error {
 func main() {
 	defer common.Done()
 
+	flag.VisitAll(func(fl *flag.Flag) {
+		fmt.Printf("%s | %s | %s\n", fl.Name, fl.DefValue, fl.Usage)
+	})
 	common.Run([]string{"s", "d"})
 }
