@@ -8,23 +8,23 @@ To prevent corrupt HL7 messages HL7PROXY filters any orphand bytes caused by cor
 
 It also supports the charater encoding of incoming or outgoing HL7 message data by dynamically calling an external application.   
 
-HL7Proxy is a command line tool which either can be run in application mode in Windows GUI or as a Windows service in the background.
+HL7PROXY is a command line tool which either can be run in application mode in Windows GUI or as a Windows service in the background.
 
 ## Workflow
-HL7Proxy must be located between the HL7 communication server and the FORUM server.
+HL7PROXY must be located between the HL7 communication server and the FORUM server.
  
 It has a persistent server socket on which the HL7 communication server can connect and server socket stays connected.
 
-If a data transfer is done from the HL7 communication server via HL7Proxy to the FORUM server HL7Proxy tries to contact the FORUM server. If the connection can be established to the FORUM server the data transfer is done.
+If a data transfer is done from the HL7 communication server via HL7PROXY to the FORUM server HL7PROXY tries to contact the FORUM server. If the connection can be established to the FORUM server the data transfer is done.
  
-After a successful data transfer the connection will likely be dropped by the FORUM server. HL7Proxy recognizes this and tries to re-establish the connection to the FORUM server the next time a new data transfer is initiated from the HL7 communication server. 
+After a successful data transfer the connection will likely be dropped by the FORUM server. HL7PROXY recognizes this and tries to re-establish the connection to the FORUM server the next time a new data transfer is initiated from the HL7 communication server. 
 
-In case there is a data transfer ongoing and a connection to the FORUM server cannot be stablished the HL7Proxy drops the connection to the HL7 communication server to indicate the unreachable FORUM server. Immediately after the drop the server socket connection is recreated to be available again to the HL7 communication server.
+In case there is a data transfer ongoing and a connection to the FORUM server cannot be stablished the HL7PROXY drops the connection to the HL7 communication server to indicate the unreachable FORUM server. Immediately after the drop the server socket connection is recreated to be available again to the HL7 communication server.
 
 ## Installation  
-HL7Proxy can be copied to any directory and just executed from there. There is no need for an OS dependent installation.
+HL7PROXY can be copied to any directory and just executed from there. There is no need for an OS dependent installation.
 
-If HL7Proxy is run as a Windows service please use a local filesystem directory and not a shared location in the network.
+If HL7PROXY is run as a Windows service please use a local filesystem directory and not a shared location in the network.
 
 ## Installation as application
 Just copy the package content into any installation directory you would like.
