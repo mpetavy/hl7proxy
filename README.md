@@ -72,7 +72,7 @@ After the encoder is successfully called by HL7PROXY the file "destfile" will be
 The encoder must not enhance the content with the MLLP control characters, those will be automatically added by the HL7PROXY. 
 
 ## Sample
-`hl7proxy -log.verbose -src :6000 -src-enc thai2utf8.bat -dest -dest-enc utf82thai.bat :75000 -file d:\hl7\hl7.log`
+`hl7proxy -log.verbose -s :6000 -senc thai2utf8.bat -d :7000 -denc utf82thai.bat -f d:\hl7\hl7.log`
 
 ### Content of thai2utf8.bat
 thaiconv -r %1 -out 3 -w %2
