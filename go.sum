@@ -179,6 +179,8 @@ github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742/go.mod h1:bx2lN
 github.com/modern-go/reflect2 v1.0.1/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
 github.com/mpetavy/common v1.1.26 h1:Iu0mbLMh5OgJGY0mUNwvVPDqHlRjWmD3z8HO1j3liHQ=
 github.com/mpetavy/common v1.1.26/go.mod h1:noUbw++8J/7TcwF8y+UeKbAxoKau5rVcSsagiw1h2s4=
+github.com/mpetavy/common v1.1.31 h1:G26GagF3r0h/t80yFG0n8R1kGaM3LXHcJB0E/tt2MOI=
+github.com/mpetavy/common v1.1.31/go.mod h1:27v5+lsL7Y53hUd5SBGrKeA8w+8RstjM5xTEvRV8Mlw=
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/opentracing/opentracing-go v1.1.0/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/paulrosania/go-charset v0.0.0-20190326053356-55c9d7a5834c h1:P6XGcuPTigoHf4TSu+3D/7QOQ1MbL6alNwrGhcW7sKw=
