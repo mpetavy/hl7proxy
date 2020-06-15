@@ -20,7 +20,6 @@ type HL7Filter struct {
 	reader  io.Reader
 	encoder string
 
-	started     bool
 	buffer      bytes.Buffer
 	msg         bytes.Buffer
 	msgComplete bool
@@ -48,32 +47,32 @@ func (this *HL7Filter) drain(p []byte) int {
 
 func (this *HL7Filter) encode(ba []byte) []byte {
 	srcFile, err := common.CreateTempFile()
-	common.Fatal(err)
+	common.Error(err)
 
 	common.Debug("srcFile: %s", srcFile.Name())
 
 	defer func() {
-		common.Fatal(os.Remove(srcFile.Name()))
+		common.Error(os.Remove(srcFile.Name()))
 	}()
 
 	destFile, err := common.CreateTempFile()
-	common.Fatal(err)
+	common.Error(err)
 
 	common.Debug("destFile: %s", destFile.Name())
 
 	defer func() {
-		common.Fatal(os.Remove(destFile.Name()))
+		common.Error(os.Remove(destFile.Name()))
 	}()
 
-	common.Fatal(ioutil.WriteFile(srcFile.Name(), ba, common.DefaultFileMode))
+	common.Error(ioutil.WriteFile(srcFile.Name(), ba, common.DefaultFileMode))
 
 	cmd := exec.Command("cmd.exe", "/c", this.encoder, srcFile.Name(), destFile.Name())
 	common.Debug(common.CmdToString(cmd))
 
-	common.Fatal(cmd.Run())
+	common.Error(cmd.Run())
 
 	ba, err = ioutil.ReadFile(destFile.Name())
-	common.Fatal(err)
+	common.Error(err)
 
 	return ba
 }
