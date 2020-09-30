@@ -29,7 +29,7 @@ const (
 )
 
 func init() {
-	common.Init(true, "1.2.0", "2018", "HL7 connection proxy", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, start, stop, nil, 0)
+	common.Init(true, "1.2.0", "", "2018", "HL7 connection proxy", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, start, stop, nil, 0)
 
 	source = flag.String("s", "", "proxy host address:port (:5000)")
 	sourceEncoder = flag.String("senc", "", "encoder to convert incoming HL7 messages")
@@ -184,8 +184,14 @@ func start() error {
 			ctxDelayer, cancelDelayer := context.WithCancel(context.Background())
 			ctxConnection, cancelConnection := context.WithCancel(context.Background())
 
-			go common.CopyWithContext(ctxConnection, cancelDelayer, emrToProxy, forumCon, teeReader, -1)
-			go common.CopyWithContext(ctxConnection, cancelDelayer, proxyToForum, emrCon, forumCon, -1)
+			go func() {
+				_, err := common.CopyWithContext(ctxConnection, cancelDelayer, emrToProxy, forumCon, teeReader, -1)
+				common.Error(err)
+			}()
+			go func() {
+				_, err := common.CopyWithContext(ctxConnection, cancelDelayer, proxyToForum, emrCon, forumCon, -1)
+				common.Error(err)
+			}()
 
 			inDelay := common.NewNotice()
 
