@@ -16,4 +16,4 @@ require (
 	software.sslmate.com/src/go-pkcs12 v0.0.0-20200408181440-2981468c0ff3 // indirect
 )
 
-// replace github.com/mpetavy/common => ../common
+replace github.com/mpetavy/common => ../common
