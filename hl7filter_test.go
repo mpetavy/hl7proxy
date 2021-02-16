@@ -17,7 +17,6 @@ var (
 )
 
 func TestMain(m *testing.M) {
-	defer common.Done()
 	flag.Parse()
 	common.Exit(m.Run())
 }
