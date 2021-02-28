@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"github.com/mpetavy/common"
 	"io"
-	"io/ioutil"
 	"os"
 	"os/exec"
 )
@@ -64,14 +63,14 @@ func (this *HL7Filter) encode(ba []byte) []byte {
 		common.Error(os.Remove(destFile.Name()))
 	}()
 
-	common.Error(ioutil.WriteFile(srcFile.Name(), ba, common.DefaultFileMode))
+	common.Error(os.WriteFile(srcFile.Name(), ba, common.DefaultFileMode))
 
 	cmd := exec.Command("cmd.exe", "/c", this.encoder, srcFile.Name(), destFile.Name())
 	common.Debug(common.CmdToString(cmd))
 
 	common.Error(cmd.Run())
 
-	ba, err = ioutil.ReadFile(destFile.Name())
+	ba, err = os.ReadFile(destFile.Name())
 	common.Error(err)
 
 	return ba
