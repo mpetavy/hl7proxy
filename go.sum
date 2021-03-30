@@ -199,8 +199,8 @@ github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421/go.mod h1:6dJ
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
 github.com/modern-go/reflect2 v1.0.1/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
-github.com/mpetavy/common v1.1.103 h1:xS30hsrl3IROp3O305IWhRZPfJhUH9B+vCbxmlbyIrM=
-github.com/mpetavy/common v1.1.103/go.mod h1:cCPy9uvLshKqcX2ACKa7z669ZTPoG679jiPhizspwIU=
+github.com/mpetavy/common v1.1.104 h1:tDRU9PdT/R/xsyNgQk9EyubzGKqRNdY9G41pL0k+i8c=
+github.com/mpetavy/common v1.1.104/go.mod h1:cCPy9uvLshKqcX2ACKa7z669ZTPoG679jiPhizspwIU=
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/opentracing/opentracing-go v1.1.0/go.mod h1:UkNAQd3GIcIGf0SeVgPpRdFStlNbqXla1AfSYxPUl2o=
 github.com/paulrosania/go-charset v0.0.0-20190326053356-55c9d7a5834c h1:P6XGcuPTigoHf4TSu+3D/7QOQ1MbL6alNwrGhcW7sKw=
