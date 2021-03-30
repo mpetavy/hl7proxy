@@ -185,11 +185,11 @@ func start() error {
 			ctxConnection, cancelConnection := context.WithCancel(context.Background())
 
 			go func() {
-				_, err := common.CopyWithContext(ctxConnection, cancelDelayer, emrToProxy, forumCon, teeReader, -1)
+				_, err := common.CopyBuffer(cancelDelayer, emrToProxy, forumCon, teeReader, -1)
 				common.Error(err)
 			}()
 			go func() {
-				_, err := common.CopyWithContext(ctxConnection, cancelDelayer, proxyToForum, emrCon, forumCon, -1)
+				_, err := common.CopyBuffer(cancelDelayer, proxyToForum, emrCon, forumCon, -1)
 				common.Error(err)
 			}()
 
