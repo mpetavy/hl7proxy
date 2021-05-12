@@ -184,6 +184,11 @@ func start() error {
 			ctxDelayer, cancelDelayer := context.WithCancel(context.Background())
 			ctxConnection, cancelConnection := context.WithCancel(context.Background())
 
+			defer func() {
+				cancelDelayer()
+				cancelConnection()
+			}()
+
 			go func() {
 				_, err := common.CopyBuffer(cancelDelayer, emrToProxy, forumCon, teeReader, -1)
 				common.Error(err)
@@ -193,14 +198,14 @@ func start() error {
 				common.Error(err)
 			}()
 
-			inDelay := common.NewNotice()
+			outsideDelay := common.NewNotice()
 
 		Delayer:
 			for {
 				select {
 				case <-ctxDelayer.Done():
-					if !inDelay.IsSet() {
-						inDelay.Set()
+					if outsideDelay.IsSet() {
+						outsideDelay.Unset()
 
 						common.Debug("Delayer received Done()")
 						common.Debug("Sleep 1 sec ...")
