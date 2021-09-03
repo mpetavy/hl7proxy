@@ -190,11 +190,11 @@ func start() error {
 			}()
 
 			go func() {
-				_, err := common.CopyBuffer(cancelDelayer, emrToProxy, forumCon, teeReader, -1)
+				_, err := common.CopyBuffer(ctxDelayer, cancelDelayer, emrToProxy, forumCon, teeReader, -1)
 				common.Error(err)
 			}()
 			go func() {
-				_, err := common.CopyBuffer(cancelDelayer, proxyToForum, emrCon, forumCon, -1)
+				_, err := common.CopyBuffer(ctxDelayer, cancelDelayer, proxyToForum, emrCon, forumCon, -1)
 				common.Error(err)
 			}()
 
