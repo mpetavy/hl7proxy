@@ -334,8 +334,8 @@ github.com/modern-go/concurrent v0.0.0-20180228061459-e0a39a4cb421/go.mod h1:6dJ
 github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd/go.mod h1:6dJC0mAP4ikYIbvyc7fijjWJddQyLn8Ig3JB5CqoB9Q=
 github.com/modern-go/reflect2 v0.0.0-20180701023420-4b7aa43c6742/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
 github.com/modern-go/reflect2 v1.0.1/go.mod h1:bx2lNnkwVCuqBIxFjflWJWanXIb3RllmbCylyMrvgv0=
-github.com/mpetavy/common v1.4.49 h1:nbiGwj0vKutq9psO4K95DY04AZhugmabyQoZtKDklfI=
-github.com/mpetavy/common v1.4.49/go.mod h1:3OSE38zCD0Esly0icfHmxEwEnIVkpqa6QMMmPRD9b/Y=
+github.com/mpetavy/common v1.4.50 h1:CdgSPopbbx33wHixuOLmHPd0jOs5I9zw1fpouh3r16E=
+github.com/mpetavy/common v1.4.50/go.mod h1:3OSE38zCD0Esly0icfHmxEwEnIVkpqa6QMMmPRD9b/Y=
 github.com/mwitkow/go-conntrack v0.0.0-20161129095857-cc309e4a2223/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/mwitkow/go-conntrack v0.0.0-20190716064945-2f068394615f/go.mod h1:qRWi+5nqEBWmkhHvq77mSJWrCKwh8bxhgT7d/eI7P4U=
 github.com/nats-io/jwt v0.3.0/go.mod h1:fRYCDE99xlTsqUzISS1Bi75UBJ6ljOJQOAAu5VglpSg=
