@@ -125,6 +125,8 @@ func start() error {
 	}
 
 	go func() {
+		defer common.UnregisterGoRoutine(common.RegisterGoRoutine(1))
+
 		for common.AppLifecycle().IsSet() {
 			err := startProxy()
 			if err != nil {
@@ -190,10 +192,14 @@ func start() error {
 			}()
 
 			go func() {
+				defer common.UnregisterGoRoutine(common.RegisterGoRoutine(1))
+
 				_, err := common.CopyBuffer(ctxDelayer, cancelDelayer, emrToProxy, forumCon, teeReader, -1)
 				common.Error(err)
 			}()
 			go func() {
+				defer common.UnregisterGoRoutine(common.RegisterGoRoutine(1))
+
 				_, err := common.CopyBuffer(ctxDelayer, cancelDelayer, proxyToForum, emrCon, forumCon, -1)
 				common.Error(err)
 			}()
