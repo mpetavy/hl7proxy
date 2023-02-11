@@ -3,7 +3,7 @@ module github.com/mpetavy/hl7proxy
 go 1.19
 
 require (
-	github.com/mpetavy/common v1.5.38
+	github.com/mpetavy/common v1.5.39
 	github.com/stretchr/testify v1.8.1
 )
 
