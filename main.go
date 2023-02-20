@@ -214,9 +214,7 @@ func start() error {
 						outsideDelay.Unset()
 
 						common.Debug("Delayer received Done()")
-						common.Debug("Sleep 1 sec ...")
-						time.Sleep(time.Second)
-						common.Debug("1 sec slept")
+						common.Sleep(time.Second)
 
 						cancelConnection()
 					}
