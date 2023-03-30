@@ -3,7 +3,7 @@ module github.com/mpetavy/hl7proxy
 go 1.19
 
 require (
-	github.com/mpetavy/common v1.5.65
+	github.com/mpetavy/common v1.5.66
 	github.com/stretchr/testify v1.8.1
 )
 
@@ -38,6 +38,7 @@ require (
 	github.com/labstack/gommon v0.3.1 // indirect
 	github.com/mattn/go-colorable v0.1.13 // indirect
 	github.com/mattn/go-isatty v0.0.16 // indirect
+	github.com/ompluscator/dynamic-struct v1.4.0 // indirect
 	github.com/paulrosania/go-charset v0.0.0-20190326053356-55c9d7a5834c // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/quasoft/memstore v0.0.0-20191010062613-2bce066d2b0b // indirect
