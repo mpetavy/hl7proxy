@@ -24,12 +24,12 @@ var (
 )
 
 const (
-	proxyToForum = "Proxy->Forum"
+	proxyToForum = "Proxy    ->Forum"
 	emrToProxy   = "Emr->Proxy"
 )
 
 func init() {
-	common.Init("hl7proxy", "1.2.0", "", "", "2018", "HL7 connection proxy", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, nil, start, stop, nil, 0)
+	common.Init("hl7proxy", "", "", "", "2018", "HL7 connection proxy", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, nil, start, stop, nil, 0)
 
 	source = flag.String("s", "", "proxy host address:port (:5000)")
 	sourceEncoder = flag.String("senc", "", "encoder to convert incoming HL7 messages")

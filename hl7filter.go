@@ -30,7 +30,7 @@ func NewHL7Filter(reader io.Reader, encoder string) *HL7Filter {
 
 func (this *HL7Filter) drain(p []byte) int {
 	if this.msgComplete {
-		l := common.Min(len(p), this.msg.Len())
+		l := min(len(p), this.msg.Len())
 
 		ba := this.msg.Next(l)
 
