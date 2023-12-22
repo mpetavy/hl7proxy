@@ -2,6 +2,7 @@ package main
 
 import (
 	"context"
+	"embed"
 	"flag"
 	"fmt"
 	"github.com/mpetavy/common"
@@ -28,8 +29,11 @@ const (
 	emrToProxy   = "Emr->Proxy"
 )
 
+//go:embed go.mod
+var resources embed.FS
+
 func init() {
-	common.Init("hl7proxy", "", "", "", "2018", "HL7 connection proxy", "mpetavy", fmt.Sprintf("https://github.com/mpetavy/%s", common.Title()), common.APACHE, nil, start, stop, nil, 0)
+	common.Init("", "", "", "", "HL7 connection proxy", "", "", "", &resources, start, stop, nil, 0)
 
 	source = flag.String("s", "", "proxy host address:port (:5000)")
 	sourceEncoder = flag.String("senc", "", "encoder to convert incoming HL7 messages")
