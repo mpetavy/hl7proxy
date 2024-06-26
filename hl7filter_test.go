@@ -22,7 +22,7 @@ func TestMain(m *testing.M) {
 }
 
 func TestStream(t *testing.T) {
-	common.InitTesting(t)
+	common.SetTesting(t)
 
 	for _, orphaned := range []string{
 		fmt.Sprintf("%c%c%c", CR, SB, CR),
