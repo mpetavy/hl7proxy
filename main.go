@@ -208,7 +208,7 @@ func start() error {
 				common.Error(err)
 			}()
 
-			outsideDelay := common.NewNotice(true)
+			outsideDelay := common.NewNotice()
 
 		Delayer:
 			for {
