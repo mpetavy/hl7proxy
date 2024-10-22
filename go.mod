@@ -5,7 +5,7 @@ go 1.23
 toolchain go1.23.2
 
 require (
-	github.com/mpetavy/common v1.8.95
+	github.com/mpetavy/common v1.8.96
 	github.com/stretchr/testify v1.9.0
 )
 
