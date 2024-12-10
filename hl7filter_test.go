@@ -5,7 +5,7 @@ import (
 	"flag"
 	"fmt"
 	"github.com/mpetavy/common"
-	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
 	"io"
 	"strings"
 	"testing"
@@ -61,8 +61,8 @@ func TestStream(t *testing.T) {
 
 				t.Logf("output: %+q\n", string(w.Bytes()))
 
-				assert.True(t, err == nil, "EOF returned")
-				assert.Equal(t, len(test.out), int(n), "Length of expected output")
+				require.True(t, err == nil, "EOF returned")
+				require.Equal(t, len(test.out), int(n), "Length of expected output")
 			})
 		}
 	}
