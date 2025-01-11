@@ -59,8 +59,8 @@ github.com/mattn/go-isatty v0.0.14/go.mod h1:7GGIvUiUoEMVVmxf/4nioHXj79iQHKdU27k
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
 github.com/mattn/go-isatty v0.0.18 h1:DOKFKCQ7FNG2L1rbrmstDN4QVRdS89Nkh85u68Uwp98=
 github.com/mattn/go-isatty v0.0.18/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
-github.com/mpetavy/common v1.9.55 h1:ABc2vQweIqMJlWeshlRpCUPjBMSSxzP1uPFBroQUvCM=
-github.com/mpetavy/common v1.9.55/go.mod h1:6KEtwKXOYk71/7MQEcvkk+Xc2aXDN8HtPeTJ3itpKyU=
+github.com/mpetavy/common v1.9.56 h1:ITce8bFM6beGte4JwCHXz9sm19JxyD+jDdVNqNeXRvw=
+github.com/mpetavy/common v1.9.56/go.mod h1:6KEtwKXOYk71/7MQEcvkk+Xc2aXDN8HtPeTJ3itpKyU=
 github.com/paulrosania/go-charset v0.0.0-20190326053356-55c9d7a5834c h1:P6XGcuPTigoHf4TSu+3D/7QOQ1MbL6alNwrGhcW7sKw=
 github.com/paulrosania/go-charset v0.0.0-20190326053356-55c9d7a5834c/go.mod h1:YnNlZP7l4MhyGQ4CBRwv6ohZTPrUJJZtEv4ZgADkbs4=
 github.com/pkg/errors v0.9.1 h1:FEBLx1zS214owpjy7qsBeixbURkuhQAwrK5UwLGTwt4=
