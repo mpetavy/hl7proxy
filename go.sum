@@ -59,8 +59,8 @@ github.com/mattn/go-isatty v0.0.14/go.mod h1:7GGIvUiUoEMVVmxf/4nioHXj79iQHKdU27k
 github.com/mattn/go-isatty v0.0.16/go.mod h1:kYGgaQfpe5nmfYZH+SKPsOc2e4SrIfOl2e/yFXSvRLM=
 github.com/mattn/go-isatty v0.0.18 h1:DOKFKCQ7FNG2L1rbrmstDN4QVRdS89Nkh85u68Uwp98=
 github.com/mattn/go-isatty v0.0.18/go.mod h1:W+V8PltTTMOvKvAeJH7IuucS94S2C6jfK/D7dTCTo3Y=
-github.com/mpetavy/common v1.10.5 h1:mBESfzn2CuUpFud0qOjiG7PIqs9NpbYcCeLHiXK23+w=
-github.com/mpetavy/common v1.10.5/go.mod h1:hW5A7qJYHtuiKrF8z1JEnEc0pUTXxioVVYVUnladoX4=
+github.com/mpetavy/common v1.10.6 h1:kMcm7hIKbGryi2qs5R652kI9mqlM/1XlkT4tLEtnk2c=
+github.com/mpetavy/common v1.10.6/go.mod h1:hW5A7qJYHtuiKrF8z1JEnEc0pUTXxioVVYVUnladoX4=
 github.com/nsf/jsondiff v0.0.0-20230430225905-43f6cf3098c1 h1:dOYG7LS/WK00RWZc8XGgcUTlTxpp3mKhdR2Q9z9HbXM=
 github.com/nsf/jsondiff v0.0.0-20230430225905-43f6cf3098c1/go.mod h1:mpRZBD8SJ55OIICQ3iWH0Yz3cjzA61JdqMLoWXeB2+8=
 github.com/paulrosania/go-charset v0.0.0-20190326053356-55c9d7a5834c h1:P6XGcuPTigoHf4TSu+3D/7QOQ1MbL6alNwrGhcW7sKw=
