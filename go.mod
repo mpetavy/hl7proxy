@@ -5,7 +5,7 @@ go 1.23.0
 toolchain go1.23.6
 
 require (
-	github.com/mpetavy/common v1.10.45
+	github.com/mpetavy/common v1.10.49
 	github.com/stretchr/testify v1.10.0
 )
 
